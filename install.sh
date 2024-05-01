@@ -7,8 +7,7 @@ docker save archlinux | sudo python3 /tmp/undocker.py -o /rootfs archlinux
 # docker rmi archlinux
 rm -fr /tmp/undocker.py
 sudo bash -c "
-pacman -Sy sudo --noconfirm
-systemctl stop docker
+systemctl stop docker docker.socket
 mkdir /rootfs/old.rootfs
 mount --bind / /rootfs/old.rootfs
 mkdir -p /rootfs/usr/lib/modules/
@@ -25,5 +24,5 @@ mv etc bin lib lib64 sbin usr /old.rootfs
 umount /rootfs/old.rootfs &&
 rm -fr /rootfs/ &&
 systemctl daemon-reexec && 
-sudo su
+su -c 'pacman -Sy sudo git archiso --noconfirm'
 "
