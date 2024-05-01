@@ -1,12 +1,12 @@
-#!/bin/sh
+#!/usr/bin/env bash
 set -e
 wget -O /tmp/undocker.py https://github.com/larsks/undocker/raw/c951f021e701b4ce61de03eb668a440e69646889/undocker.py
 sudo mkdir -p /rootfs
-docker pull zaoqi/github-actions-archlinux
-docker save zaoqi/github-actions-archlinux | sudo python3 /tmp/undocker.py -o /rootfs zaoqi/github-actions-archlinux
-docker rmi zaoqi/github-actions-archlinux
+docker pull archlinux/base
+docker save archlinux/base | sudo python3 /tmp/undocker.py -o /rootfs archlinux/base
+# docker rmi archlinux
 rm -fr /tmp/undocker.py
-sudo sh -c "
+sudo bash -c "
 systemctl stop docker
 mkdir /rootfs/old.rootfs
 mount --bind / /rootfs/old.rootfs
