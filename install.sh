@@ -2,8 +2,8 @@
 set -e
 wget -O /tmp/undocker.py https://github.com/larsks/undocker/raw/c951f021e701b4ce61de03eb668a440e69646889/undocker.py
 sudo mkdir -p /rootfs
-docker pull archlinux/base
-docker save archlinux/base | sudo python3 /tmp/undocker.py -o /rootfs archlinux/base
+docker pull archlinux
+docker save archlinux | sudo python3 /tmp/undocker.py -o /rootfs archlinux
 # docker rmi archlinux
 rm -fr /tmp/undocker.py
 sudo bash -c "
